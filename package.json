@@ -1,0 +1,62 @@
+{
+  "name": "dsh-mcp-project",
+  "version": "0.1.0",
+  "description": "Per-project MCP servers for DeepSeek Harness: declare servers in <project>/.dsh/mcp.yml or Claude Code's .mcp.json and they mount only into that project's Sessions.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "mcp",
+    "model-context-protocol",
+    "claude-code"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./lib/index.js",
+  "types": "./lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE",
+    "market-index.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1nTooDeep/dsh-mcp-project.git"
+  },
+  "homepage": "https://github.com/1nTooDeep/dsh-mcp-project#readme",
+  "bugs": {
+    "url": "https://github.com/1nTooDeep/dsh-mcp-project/issues"
+  },
+  "engines": {
+    "node": ">=20",
+    "dsh": ">=0.2.0-rc.1 <2"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.0-rc <5",
+    "@deepseek-ai/dsh-agent": ">=0.2.0-rc <2",
+    "@deepseek-ai/dsh-mcp-client": ">=0.2.0-rc <2",
+    "@deepseek-ai/dsh-session": ">=0.2.0-rc <2",
+    "@deepseek-ai/schemastery": "^3.18.2"
+  },
+  "dependencies": {
+    "yaml": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "typescript": "^5.9.0"
+  },
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "test": "node --test test/*.test.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

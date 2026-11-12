@@ -1,0 +1,43 @@
+/**
+ * Plugin configuration: where to look for a project file and how the runtime behaves.
+ *
+ * The servers themselves live in the project file, never here, so switching a
+ * profile or a preset never has to describe a project's MCP surface.
+ */
+
+import z from '@deepseek-ai/schemastery'
+
+export interface Config {
+  /** Master switch. When false no project file is read. */
+  enabled: boolean
+  /** Candidate project-relative paths, tried in this order at every ancestor; `.mcp.json` is the Claude Code dialect. */
+  fileNames: string[]
+  /** Reload mounted servers when the file changes, appears, or disappears. */
+  watch: boolean
+  /** Coalescing window for filesystem events, in milliseconds. */
+  watchDebounceMs: number
+  /** Upper bound on how long one Session waits for its servers when it is created. */
+  startupTimeoutMs: number
+  /** Upper bound on servers mounted per Session. */
+  maxServers: number
+  /** Mount project servers in subagent Sessions too; disabling halves process count on fan-out. */
+  includeSubagents: boolean
+}
+
+/** Schema exposed to the Cordis loader as `Config`. */
+export const PluginConfig: z<Config> = z.object({
+  enabled: z.boolean().default(true),
+  fileNames: z.array(String).default(['.dsh/mcp.yml', '.dsh/mcp.yaml', '.mcp.json']),
+  watch: z.boolean().default(true),
+  watchDebounceMs: z.number().step(1).min(50).default(250),
+  startupTimeoutMs: z.number().step(1).min(0).default(5000),
+  maxServers: z.number().step(1).min(1).default(16),
+  includeSubagents: z.boolean().default(true),
+})
+
+/** Validate loader input once, so the runtime never re-reads raw configuration. */
+export function resolveConfig(raw: Partial<Config> | undefined): Config {
+  const config = (PluginConfig as unknown as (input: unknown) => Config)(raw ?? {})
+  if (config.fileNames.length === 0) throw new Error('mcp-project: fileNames must name at least one project file')
+  return config
+}
