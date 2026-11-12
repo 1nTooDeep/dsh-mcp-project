@@ -1,0 +1,47 @@
+{
+  "format": 1,
+  "title": { "en": "dsh-mcp-project", "zh": "dsh-mcp-project" },
+  "description": {
+    "en": "Per-project MCP servers for DeepSeek Harness",
+    "zh": "DeepSeek Harness 的项目级 MCP 服务器"
+  },
+  "metadata": {
+    "categories": {
+      "integration": { "title": { "en": "Integration", "zh": "集成" } }
+    },
+    "labels": {
+      "mcp": { "title": { "en": "MCP", "zh": "MCP" } }
+    },
+    "sortKeys": {}
+  },
+  "plugins": [
+    {
+      "name": "dsh-mcp-project",
+      "title": { "en": "Project MCP servers", "zh": "项目级 MCP" },
+      "description": {
+        "en": "Reads <project>/.dsh/mcp.yml or Claude Code's .mcp.json and mounts those MCP servers only into that project's Sessions.",
+        "zh": "读取 <project>/.dsh/mcp.yml 或 Claude Code 的 .mcp.json，只把其中的 MCP server 挂给该项目的会话。"
+      },
+      "homepage": "https://github.com/1nTooDeep/dsh-mcp-project",
+      "repository": { "url": "https://github.com/1nTooDeep/dsh-mcp-project" },
+      "metadata": {
+        "category": "integration",
+        "keywords": ["mcp", "project", "monorepo", "claude-code"],
+        "labels": ["mcp"],
+        "sortKeys": {}
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "publishTimestamp": 1794452458,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/1nTooDeep/dsh-mcp-project",
+            "commit": "a29913dadf0ed8f9928d35e482f6674d3ae2e626"
+          },
+          "engines": { "dsh": ">=0.2.0-rc.1 <2" }
+        }
+      ]
+    }
+  ]
+}
